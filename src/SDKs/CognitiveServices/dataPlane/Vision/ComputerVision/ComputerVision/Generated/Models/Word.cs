@@ -10,6 +10,7 @@
 
 namespace Microsoft.Azure.CognitiveServices.Vision.ComputerVision.Models
 {
+    using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
@@ -28,10 +29,11 @@ namespace Microsoft.Azure.CognitiveServices.Vision.ComputerVision.Models
         /// <summary>
         /// Initializes a new instance of the Word class.
         /// </summary>
-        public Word(IList<int> boundingBox = default(IList<int>), string text = default(string))
+        public Word(IList<int> boundingBox, string text, string confidence = default(string))
         {
             BoundingBox = boundingBox;
             Text = text;
+            Confidence = confidence;
             CustomInit();
         }
 
@@ -50,5 +52,27 @@ namespace Microsoft.Azure.CognitiveServices.Vision.ComputerVision.Models
         [JsonProperty(PropertyName = "text")]
         public string Text { get; set; }
 
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "confidence")]
+        public string Confidence { get; set; }
+
+        /// <summary>
+        /// Validate the object.
+        /// </summary>
+        /// <exception cref="ValidationException">
+        /// Thrown if validation fails
+        /// </exception>
+        public virtual void Validate()
+        {
+            if (BoundingBox == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "BoundingBox");
+            }
+            if (Text == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "Text");
+            }
+        }
     }
 }

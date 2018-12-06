@@ -325,6 +325,89 @@ namespace Microsoft.Azure.CognitiveServices.Vision.ComputerVision
             }
 
             /// <summary>
+            /// Use this interface to get the result of a Read operation, employing the
+            /// state-of-the-art Optical Character Recognition (OCR) algorithms. When you
+            /// use the Read interface, the response contains OCR results.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='mode'>
+            /// Type of text to recognize. Possible values include: 'Handwritten',
+            /// 'Printed'
+            /// </param>
+            /// <param name='url'>
+            /// Publicly reachable URL of an image
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<ReadResult> ReadAsync(this IComputerVisionClient operations, string url, TextRecognitionMode mode, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.ReadWithHttpMessagesAsync(url, mode, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Use this interface to get the result of a Read Document operation,
+            /// employing the state-of-the-art Optical Character Recognition (OCR)
+            /// algorithms optimized for text-heavy documents. When you use the Read
+            /// Document interface, the response contains a field called
+            /// "Operation-Location". The "Operation-Location" field contains the URL that
+            /// you must use for your "Get Read Result operation" to access OCR results.​
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='mode'>
+            /// Type of text to recognize. Possible values include: 'Handwritten',
+            /// 'Printed'
+            /// </param>
+            /// <param name='url'>
+            /// Publicly reachable URL of an image
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<ReadDocumentHeaders> ReadDocumentAsync(this IComputerVisionClient operations, string url, TextRecognitionMode mode, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.ReadDocumentWithHttpMessagesAsync(url, mode, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Headers;
+                }
+            }
+
+            /// <summary>
+            /// This interface is used for getting OCR results of "Read Document"
+            /// operation. The URL to this interface should be retrieved from
+            /// "Operation-Location" field returned from Read Document interface.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='operationId'>
+            /// Id of read operation returned in the response of the "Read Document"
+            /// interface.
+            /// </param>
+            /// <param name='deleteResult'>
+            /// If this parameter is set to "true", OCR results are immediately discarded
+            /// upon successful retrieval. This is an optional parameter, if it’s not
+            /// specified, OCR results are not discarded by default.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<ReadResult> GetReadResultAsync(this IComputerVisionClient operations, string operationId, bool? deleteResult = false, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetReadResultWithHttpMessagesAsync(operationId, deleteResult, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
             /// This operation extracts a rich set of visual features based on the image
             /// content.
             /// </summary>
@@ -575,6 +658,61 @@ namespace Microsoft.Azure.CognitiveServices.Vision.ComputerVision
             public static async Task<RecognizeTextInStreamHeaders> RecognizeTextInStreamAsync(this IComputerVisionClient operations, Stream image, TextRecognitionMode mode, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.RecognizeTextInStreamWithHttpMessagesAsync(image, mode, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Headers;
+                }
+            }
+
+            /// <summary>
+            /// Use this interface to get the result of a Read operation, employing the
+            /// state-of-the-art Optical Character Recognition (OCR) algorithms. When you
+            /// use the Read interface, the response contains OCR results.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='image'>
+            /// An image stream.
+            /// </param>
+            /// <param name='mode'>
+            /// Type of text to recognize. Possible values include: 'Handwritten',
+            /// 'Printed'
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<ReadResult> ReadInStreamAsync(this IComputerVisionClient operations, Stream image, TextRecognitionMode mode, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.ReadInStreamWithHttpMessagesAsync(image, mode, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Use this interface to get the result of a Read Document operation,
+            /// employing the state-of-the-art Optical Character Recognition (OCR)
+            /// algorithms optimized for text-heavy documents. When you use the Read
+            /// Document interface, the response contains a field called
+            /// "Operation-Location". The "Operation-Location" field contains the URL that
+            /// you must use for your "Get Read Result operation" to access OCR results.​
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='image'>
+            /// An image stream.
+            /// </param>
+            /// <param name='mode'>
+            /// Type of text to recognize. Possible values include: 'Handwritten',
+            /// 'Printed'
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<ReadDocumentInStreamHeaders> ReadDocumentInStreamAsync(this IComputerVisionClient operations, Stream image, TextRecognitionMode mode, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.ReadDocumentInStreamWithHttpMessagesAsync(image, mode, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Headers;
                 }

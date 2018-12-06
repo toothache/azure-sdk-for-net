@@ -11,27 +11,29 @@
 namespace Microsoft.Azure.CognitiveServices.Vision.ComputerVision.Models
 {
     using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
 
-    public partial class TextOperationResult
+    public partial class ReadResult
     {
         /// <summary>
-        /// Initializes a new instance of the TextOperationResult class.
+        /// Initializes a new instance of the ReadResult class.
         /// </summary>
-        public TextOperationResult()
+        public ReadResult()
         {
             CustomInit();
         }
 
         /// <summary>
-        /// Initializes a new instance of the TextOperationResult class.
+        /// Initializes a new instance of the ReadResult class.
         /// </summary>
         /// <param name="status">Status of the text operation. Possible values
         /// include: 'Not Started', 'Running', 'Failed', 'Succeeded'</param>
-        public TextOperationResult(TextOperationStatusCodes status = default(TextOperationStatusCodes), RecognitionResult recognitionResult = default(RecognitionResult))
+        public ReadResult(TextOperationStatusCodes status = default(TextOperationStatusCodes), IList<RecognitionResult> recognitionResults = default(IList<RecognitionResult>))
         {
             Status = status;
-            RecognitionResult = recognitionResult;
+            RecognitionResults = recognitionResults;
             CustomInit();
         }
 
@@ -49,21 +51,8 @@ namespace Microsoft.Azure.CognitiveServices.Vision.ComputerVision.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "recognitionResult")]
-        public RecognitionResult RecognitionResult { get; set; }
+        [JsonProperty(PropertyName = "recognitionResults")]
+        public IList<RecognitionResult> RecognitionResults { get; set; }
 
-        /// <summary>
-        /// Validate the object.
-        /// </summary>
-        /// <exception cref="Rest.ValidationException">
-        /// Thrown if validation fails
-        /// </exception>
-        public virtual void Validate()
-        {
-            if (RecognitionResult != null)
-            {
-                RecognitionResult.Validate();
-            }
-        }
     }
 }
