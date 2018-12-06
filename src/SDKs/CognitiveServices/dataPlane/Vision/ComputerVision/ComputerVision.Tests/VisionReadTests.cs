@@ -14,13 +14,13 @@ namespace ComputerVisionSDK.Tests
 {
     public class VisionReadTests : BaseTests
     {
-        static private IList<RecognitionResultWithImageSizeAndOrientation> GetRecognitionResultsWithPolling(IComputerVisionClient client, string operationLocation)
+        static private IList<RecognitionResult> GetRecognitionResultsWithPolling(IComputerVisionClient client, string operationLocation)
         {
             string operationId = operationLocation.Substring(operationLocation.LastIndexOf('/') + 1);
 
             for (int remainingTries = 10; remainingTries > 0; remainingTries--)
             {
-                ReadDocumentResult result = client.GetReadResultAsync(operationId).Result;
+                ReadResult result = client.GetReadResultAsync(operationId).Result;
 
                 Assert.True(result.Status != TextOperationStatusCodes.Failed);
 
