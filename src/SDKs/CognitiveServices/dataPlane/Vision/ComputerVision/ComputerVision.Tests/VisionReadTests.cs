@@ -109,7 +109,7 @@ namespace ComputerVisionSDK.Tests
         {
             using (MockContext context = MockContext.Start(this.GetType().FullName))
             {
-                HttpMockServer.Initialize(this.GetType().FullName, "ReadTest");
+                HttpMockServer.Initialize(this.GetType().FullName, "ReadDocumentTest");
 
                 string imageUrl = GetTestImageUrl("signage.jpg");
                 using (IComputerVisionClient client = GetComputerVisionClient(HttpMockServer.CreateInstance()))
@@ -145,7 +145,7 @@ namespace ComputerVisionSDK.Tests
         {
             using (MockContext context = MockContext.Start(this.GetType().FullName))
             {
-                HttpMockServer.Initialize(this.GetType().FullName, "ReadInStreamTest");
+                HttpMockServer.Initialize(this.GetType().FullName, "ReadDocumentInStreamTest");
 
                 using (IComputerVisionClient client = GetComputerVisionClient(HttpMockServer.CreateInstance()))
                 using (FileStream stream = new FileStream(GetTestImagePath("whiteboard.jpg"), FileMode.Open))
